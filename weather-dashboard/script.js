@@ -155,11 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
         handleClass: 'rangeslider__handle',
         start: [0, 35],
 
-        onInit: function() {
-            // Get initial values from the plugin
-            const values = this.value.split(',').map(Number);
-            temperatureRange[0] = values[0];
-            temperatureRange[1] = values[1];
+        onInit: function(position, value) {
+            // Use the 'start' option to get initial values
+            temperatureRange[0] = this.options.start[0];
+            temperatureRange[1] = this.options.start[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
