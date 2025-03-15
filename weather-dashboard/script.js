@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let temperatureRange = [0, 35]; // Initial temperature range
     let $temperatureRange = $('#temperatureRange'); // Cache the jQuery object
 
-
     function generateMockWeatherData(city) {
         const data = {
             coord: { lat: 0, lon: 0 },
@@ -146,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, pointLabels: { color: '#e0e0e0' } } },
             plugins: { tooltip: { mode: 'point' } } } });
     }
-
     // Initialize rangeslider
     $temperatureRange.rangeslider({
         polyfill: false,
@@ -155,15 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
         handleClass: 'rangeslider__handle',
         start: [0, 35],
 
-        onInit: function(position, value) {
-            // Use the 'start' option to get initial values
+        onInit: function() {
+            // No need to split the value in onInit
             temperatureRange[0] = this.options.start[0];
             temperatureRange[1] = this.options.start[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+
         },
         onSlide: function(position, value) {
-            // Get the values, split the string, and convert to numbers
-            const values = this.value.split(',').map(Number);
+            const values = this.$element.val().split(',').map(Number); // Get value from the INPUT
             temperatureRange[0] = values[0];
             temperatureRange[1] = values[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
@@ -173,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDashboard(currentData);
         },
         onSlideEnd: function(position, value) {
-            const values = this.value.split(',').map(Number);
+            const values = this.$element.val().split(',').map(Number);  // Get value from the INPUT
             temperatureRange[0] = values[0];
             temperatureRange[1] = values[1];
             const selectedCity = citySelector.value;
@@ -181,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDashboard(currentData);
         }
     });
-
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
         updateDashboard(data);
