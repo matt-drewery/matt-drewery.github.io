@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             coord: { lat: 0, lon: 0 },
             main: { temp: 0, humidity: 0 },
             wind: { speed: 0 },
-            historical:,
+            historical: [], // Corrected: Initialize as empty array
             radar: { temp: 0, humidity: 0, wind: 0 }
         };
 
