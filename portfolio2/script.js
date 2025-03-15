@@ -1,4 +1,3 @@
-const apiKey = '8084cd39c882ef990f599f57a10ed30e'; // Replace with your API key
 const citySelector = document.getElementById('city');
 const temperatureCtx = document.getElementById('temperatureChart').getContext('2d');
 const humidityCtx = document.getElementById('humidityChart').getContext('2d');
@@ -8,17 +7,36 @@ let map;
 let marker;
 let temperatureChart, humidityChart, windChart;
 
-function fetchWeatherData(city) {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function generateMockWeatherData(city) {
+    const data = {
+        coord: {
+            lat: 0,
+            lon: 0
+        },
+        main: {
+            temp: 0,
+            humidity: 0
+        },
+        wind: {
+            speed: 0
+        }
+    };
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            updateDashboard(data);
-        })
-        .catch(error => {
-            console.error('Error fetching weather data:', error);
-        });
+    if (city === 'London') {
+        data.coord = { lat: 51.5074, lon: -0.1278 };
+        data.main = { temp: 15, humidity: 70 };
+        data.wind = { speed: 5 };
+    } else if (city === 'New York') {
+        data.coord = { lat: 40.7128, lon: -74.0060 };
+        data.main = { temp: 20, humidity: 60 };
+        data.wind = { speed: 7 };
+    } else if (city === 'Tokyo') {
+        data.coord = { lat: 35.6895, lon: 139.6917 };
+        data.main = { temp: 25, humidity: 55 };
+        data.wind = { speed: 3 };
+    }
+
+    return data;
 }
 
 function updateDashboard(data) {
@@ -79,7 +97,9 @@ function createCharts(data) {
 }
 
 citySelector.addEventListener('change', () => {
-    fetchWeatherData(citySelector.value);
+    const data = generateMockWeatherData(citySelector.value);
+    updateDashboard(data);
 });
 
-fetchWeatherData(citySelector.value); // Initial load
+const initialData = generateMockWeatherData(citySelector.value);
+updateDashboard(initialData); // Initial load
