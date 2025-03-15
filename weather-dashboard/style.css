@@ -55,13 +55,13 @@ input[type="range"] {
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased chart size */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
 }
 
 canvas {
     width: 100% !important;
-    height: 400px !important; /* Increased chart size */
+    height: 400px !important;
     background-color: #2c2c2c;
     border-radius: 8px;
     padding: 20px;
@@ -89,22 +89,22 @@ output {
     padding: 8px 12px;
     border-radius: 6px;
     margin-left: 10px;
-    min-width: 100px; /* Added minimum width */
-    text-align: center; /* Added text alignment */
+    min-width: 100px;
+    text-align: center;
 }
 
 .rangeslider__handle {
-    background-color: #bb86fc;
-    width: 20px; /* Increased handle size */
-    height: 20px; /* Increased handle size */
-    top: -8px; /* Adjust handle position */
+    background-color: #bb86fc !important;
+    width: 20px !important;
+    height: 20px !important;
+    top: -8px !important;
 }
 
 .rangeslider__fill {
-    background-color: #bb86fc;
-    height: 4px; /* Increased fill height */
+    background-color: #bb86fc !important;
+    height: 4px !important;
 }
 
 .rangeslider {
-    height: 4px; /* Increased slider height */
+    height: 4px !important;
 }
