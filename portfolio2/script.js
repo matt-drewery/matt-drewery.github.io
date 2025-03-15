@@ -1,4 +1,4 @@
-const apiKey = '4ef3547e70408474db706d2e44253cdc'; // Replace with your API key
+const apiKey = '8084cd39c882ef990f599f57a10ed30e'; // Replace with your API key
 const citySelector = document.getElementById('city');
 const temperatureCtx = document.getElementById('temperatureChart').getContext('2d');
 const humidityCtx = document.getElementById('humidityChart').getContext('2d');
