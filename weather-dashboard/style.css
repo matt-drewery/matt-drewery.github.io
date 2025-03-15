@@ -5,14 +5,14 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light text */
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
 .dashboard {
     width: 90%;
     max-width: 1200px;
-    background-color: #1e1e1e; /* Slightly lighter dark background for container */
+    background-color: #1e1e1e;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -21,7 +21,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #bb86fc; /* Accent color */
+    color: #bb86fc;
 }
 
 #map {
@@ -43,7 +43,8 @@ label {
     color: #bdbdbd;
 }
 
-select, input[type="range"] {
+select,
+input[type="range"] {
     background-color: #2c2c2c;
     color: #e0e0e0;
     border: 1px solid #424242;
@@ -54,13 +55,13 @@ select, input[type="range"] {
 
 .charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Increased chart size */
     gap: 30px;
 }
 
 canvas {
     width: 100% !important;
-    height: 350px !important;
+    height: 400px !important; /* Increased chart size */
     background-color: #2c2c2c;
     border-radius: 8px;
     padding: 20px;
@@ -78,6 +79,8 @@ canvas {
 
 .range-sliders {
     margin-top: 15px;
+    display: flex;
+    align-items: center;
 }
 
 output {
@@ -86,12 +89,22 @@ output {
     padding: 8px 12px;
     border-radius: 6px;
     margin-left: 10px;
+    min-width: 100px; /* Added minimum width */
+    text-align: center; /* Added text alignment */
 }
 
 .rangeslider__handle {
-  background-color: #bb86fc;
+    background-color: #bb86fc;
+    width: 20px; /* Increased handle size */
+    height: 20px; /* Increased handle size */
+    top: -8px; /* Adjust handle position */
 }
 
 .rangeslider__fill {
     background-color: #bb86fc;
+    height: 4px; /* Increased fill height */
+}
+
+.rangeslider {
+    height: 4px; /* Increased slider height */
 }
