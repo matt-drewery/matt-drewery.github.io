@@ -6,6 +6,7 @@
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.css">
 </head>
 <body>
     <div class="dashboard">
@@ -18,16 +19,24 @@
                 <option value="New York">New York</option>
                 <option value="Tokyo">Tokyo</option>
             </select>
+            <div class="range-sliders">
+                <label for="temperatureRange">Temperature Range (°C):</label>
+                <input type="range" id="temperatureRange" min="0" max="35" value="0,35" data-rangeslider>
+                <output id="temperatureRangeValue"></output>
+            </div>
         </div>
         <div class="charts">
             <canvas id="temperatureChart"></canvas>
             <canvas id="humidityChart"></canvas>
             <canvas id="windChart"></canvas>
+            <canvas id="historicalChart"></canvas>
+            <canvas id="radarChart"></canvas>
         </div>
         <div id="tooltip"></div>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.3/rangeslider.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
