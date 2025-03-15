@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let map;
     let marker;
     let combinedChart, historicalChart, radarChart;
-    let temperatureRange = [0, 35]; // Initial temperature range
-    let $temperatureRange = $('#temperatureRange'); // Cache the jQuery object
+    let temperatureRange = [0, 35];
+    let $temperatureRange = $('#temperatureRange');
 
     function generateMockWeatherData(city) {
         const data = {
@@ -180,7 +180,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
-        $temperatureRange.rangeslider('values', [0, 35]);
+        // Reset the range slider to the default values AND re-initialize it.
+        $temperatureRange.rangeslider('destroy');
+        $temperatureRange.rangeslider({
+             polyfill: false,
+            rangeClass: 'rangeslider',
+            fillClass: 'rangeslider__fill',
+            handleClass: 'rangeslider__handle',
+            values: [0, 35],
+            onInit: function() {
+                const values = this.$element.val().split(',');
+                temperatureRange[0] = parseInt(values[0]);
+                temperatureRange[1] = parseInt(values[1]);
+                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+            },
+            onSlide: function(position, value) {
+                const values = this.$element.val().split(',');
+                temperatureRange[0] = parseInt(values[0]);
+                temperatureRange[1] = parseInt(values[1]);
+                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+
+                const selectedCity = citySelector.value;
+                const currentData = generateMockWeatherData(selectedCity);
+                updateDashboard(currentData);
+            },
+            onSlideEnd: function(position, value) {
+                const values = this.$element.val().split(',');
+                temperatureRange[0] = parseInt(values[0]);
+                temperatureRange[1] = parseInt(values[1]);
+                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+                const selectedCity = citySelector.value;
+                const currentData = generateMockWeatherData(selectedCity);
+                updateDashboard(currentData);
+            }
+        });
+
         temperatureRange = [0, 35];
         temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         updateDashboard(data);
