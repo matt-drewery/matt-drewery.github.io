@@ -4,12 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const historicalCtx = document.getElementById('historicalChart').getContext('2d');
     const radarCtx = document.getElementById('radarChart').getContext('2d');
     const tooltip = document.getElementById('tooltip');
-    const temperatureRangeOutput = document.getElementById('temperatureRangeValue');
     let map;
     let marker;
     let combinedChart, historicalChart, radarChart;
-    let temperatureRange = [0, 35];
-    let $temperatureRange = $('#temperatureRange');
 
     function generateMockWeatherData(city) {
         const data = {
@@ -57,16 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        const filteredHistorical = data.historical.filter(temp => {
-            return temp >= temperatureRange[0] && temp <= temperatureRange[1];
-        });
-
-        const filteredData = {
-            ...data,
-            historical: filteredHistorical
-        };
-
-        createCharts(filteredData);
+        createCharts(data);
     }
 
     function createCharts(data) {
@@ -144,90 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             plugins: { tooltip: { mode: 'point' } } } });
     }
 
-    $temperatureRange.rangeslider({
-        polyfill: false,
-        rangeClass: 'rangeslider',
-        fillClass: 'rangeslider__fill',
-        handleClass: 'rangeslider__handle',
-        values: [0, 35],
-
-        onInit: function() {
-            const values = this.$element.val().split(',');
-            if (values.length === 2) {
-                temperatureRange[0] = parseInt(values[0]);
-                temperatureRange[1] = parseInt(values[1]);
-                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-            }
-        },
-        onSlide: function(position, value) {
-            const values = this.$element.val().split(',');
-            if (values.length === 2) {
-                temperatureRange[0] = parseInt(values[0]);
-                temperatureRange[1] = parseInt(values[1]);
-                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-
-                const selectedCity = citySelector.value;
-                const currentData = generateMockWeatherData(selectedCity);
-                updateDashboard(currentData);
-            }
-        },
-        onSlideEnd: function(position, value) {
-            const values = this.$element.val().split(',');
-            if (values.length === 2) {
-                temperatureRange[0] = parseInt(values[0]);
-                temperatureRange[1] = parseInt(values[1]);
-                temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-                const selectedCity = citySelector.value;
-                const currentData = generateMockWeatherData(selectedCity);
-                updateDashboard(currentData);
-            }
-        }
-    });
-
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
-        $temperatureRange.rangeslider('destroy');
-        $temperatureRange.rangeslider({
-             polyfill: false,
-            rangeClass: 'rangeslider',
-            fillClass: 'rangeslider__fill',
-            handleClass: 'rangeslider__handle',
-            values: [0, 35],
-            onInit: function() {
-                const values = this.$element.val().split(',');
-                if (values.length === 2) {
-                    temperatureRange[0] = parseInt(values[0]);
-                    temperatureRange[1] = parseInt(values[1]);
-                    temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-                }
-            },
-            onSlide: function(position, value) {
-                const values = this.$element.val().split(',');
-                if (values.length === 2) {
-                    temperatureRange[0] = parseInt(values[0]);
-                    temperatureRange[1] = parseInt(values[1]);
-                    temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-
-                    const selectedCity = citySelector.value;
-                    const currentData = generateMockWeatherData(selectedCity);
-                    updateDashboard(currentData);
-                }
-            },
-            onSlideEnd: function(position, value) {
-                const values = this.$element.val().split(',');
-                if (values.length === 2) {
-                    temperatureRange[0] = parseInt(values[0]);
-                    temperatureRange[1] = parseInt(values[1]);
-                    temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-                    const selectedCity = citySelector.value;
-                    const currentData = generateMockWeatherData(selectedCity);
-                    updateDashboard(currentData);
-                }
-            }
-        });
-
-        temperatureRange = [0, 35];
-        temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         updateDashboard(data);
     });
 
