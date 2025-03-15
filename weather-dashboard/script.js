@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             coord: { lat: 0, lon: 0 },
             main: { temp: 0, humidity: 0 },
             wind: { speed: 0 },
-            historical: [],
+            historical:,
             radar: { temp: 0, humidity: 0, wind: 0 }
         };
 
@@ -151,20 +151,18 @@ document.addEventListener('DOMContentLoaded', () => {
         rangeClass: 'rangeslider',
         fillClass: 'rangeslider__fill',
         handleClass: 'rangeslider__handle',
-        start: [0, 35],
+        values: [0, 35], // Use 'values' instead of 'start' for a range slider
 
         onInit: function() {
-            // **CRITICAL FIX:** Update the *input element's* value on init.
-            this.$element.val(this.options.start.join(',')); // Set the actual input value
-            temperatureRange[0] = this.options.start[0];
-            temperatureRange[1] = this.options.start[1];
+            const values = this.value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
-            const values = this.$element.val().split(',').map(Number); // Get value from the INPUT
-            temperatureRange[0] = values[0];
-            temperatureRange[1] = values[1];
-            // Update output *after* updating temperatureRange
+            const values = this.value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
 
             const selectedCity = citySelector.value;
@@ -172,10 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDashboard(currentData);
         },
         onSlideEnd: function(position, value) {
-            const values = this.$element.val().split(',').map(Number);  // Get value from the INPUT
-            temperatureRange[0] = values[0];
-            temperatureRange[1] = values[1];
-             // Update output *after* updating temperatureRange
+            const values = this.value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
@@ -186,8 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
          // Reset the range slider to the default values when the city changes.
-        $temperatureRange.rangeslider('value', '0,35'); // Correctly set the value
+        $temperatureRange.rangeslider('values', [0, 35]); // Use 'values' to set both handles
         temperatureRange = [0, 35]; // Reset internal range
+        temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`; // Update output
         updateDashboard(data);
     });
 

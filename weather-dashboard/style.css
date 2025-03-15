@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Changed height to min-height to ensure content doesn't get cut off */
     margin: 0;
     background-color: #121212;
     color: #e0e0e0;
@@ -58,7 +58,7 @@ input[type="range"] {
 
 /* Make sure #map styles override canvas styles */
 #map {
-    height: 550px !important; /* Increased map height AND !important */
+    height: 500px !important; /* Adjusted map height */
     width: 100%;
     margin-bottom: 30px;
     border-radius: 8px;
