@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let marker;
     let combinedChart, historicalChart, radarChart;
     let temperatureRange = [0, 35]; // Initial temperature range
+    let $temperatureRange = $('#temperatureRange'); // Cache the jQuery object
+
 
     function generateMockWeatherData(city) {
         const data = {
@@ -146,41 +148,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize rangeslider
-    $('#temperatureRange').rangeslider({
-        polyfill: false, // Important for proper initialization
+    $temperatureRange.rangeslider({
+        polyfill: false,
         rangeClass: 'rangeslider',
         fillClass: 'rangeslider__fill',
         handleClass: 'rangeslider__handle',
-        start: [0, 35], // Set initial range here
+        start: [0, 35],
 
         onInit: function() {
-            // Get initial values from the plugin's internal data
-            temperatureRange[0] = this.min;
-            temperatureRange[1] = this.max;
+            // Get initial values from the plugin
+            const values = this.value.split(',').map(Number);
+            temperatureRange[0] = values[0];
+            temperatureRange[1] = values[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
-            // Get the values from the plugin's handles, and convert to numbers
-            temperatureRange[0] = parseInt(this.handle[0].attributes[2].nodeValue);
-            temperatureRange[1] = parseInt(this.handle[1].attributes[2].nodeValue);
+            // Get the values, split the string, and convert to numbers
+            const values = this.value.split(',').map(Number);
+            temperatureRange[0] = values[0];
+            temperatureRange[1] = values[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
 
-            // Update the dashboard *during* the slide for immediate feedback
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
             updateDashboard(currentData);
         },
         onSlideEnd: function(position, value) {
-             // Get the values from the plugin's handles, and convert to numbers
-            temperatureRange[0] = parseInt(this.handle[0].attributes[2].nodeValue);
-            temperatureRange[1] = parseInt(this.handle[1].attributes[2].nodeValue);
-             // Update the dashboard with the new temperature range
+            const values = this.value.split(',').map(Number);
+            temperatureRange[0] = values[0];
+            temperatureRange[1] = values[1];
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
             updateDashboard(currentData);
         }
     });
-
 
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
@@ -190,5 +191,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial data load
     const initialData = generateMockWeatherData(citySelector.value);
     updateDashboard(initialData);
-
 });
