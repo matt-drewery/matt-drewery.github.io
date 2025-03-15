@@ -18,9 +18,15 @@ body {
 }
 
 #map {
-    height: 400px;
+    height: 400px; /* Or use height: 50vh; */
     width: 100%;
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Adjust for smaller screens */
+    }
 }
 
 .controls {
