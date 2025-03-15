@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const historicalCtx = document.getElementById('historicalChart').getContext('2d');
     const radarCtx = document.getElementById('radarChart').getContext('2d');
     const tooltip = document.getElementById('tooltip');
+    const temperatureRangeOutput = document.getElementById('temperatureRangeValue');
     let map;
     let marker;
     let combinedChart, historicalChart, radarChart;
-    let temperatureRange = [0, 35];
+    let temperatureRange = [0, 35]; // Initial temperature range
 
     function generateMockWeatherData(city) {
         const data = {
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             historical: [],
             radar: { temp: 0, humidity: 0, wind: 0 }
         };
-    
+
         if (city === 'London') {
             data.coord = { lat: 51.5074, lon: -0.1278 };
             data.main = { temp: 12, humidity: 80 };
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.historical = [5, 8, 12, 18, 23, 27, 30, 31, 28, 22, 16, 10];
             data.radar = { temp: 27, humidity: 75, wind: 4 };
         }
-    
+
         return data;
     }
 
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        // Filter historical data
+        // Filter historical data based on the current temperatureRange
         const filteredHistorical = data.historical.filter(temp => {
             return temp >= temperatureRange[0] && temp <= temperatureRange[1];
         });
@@ -66,9 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             historical: filteredHistorical
         };
 
+
         createCharts(filteredData);
     }
-    
+
     function createCharts(data) {
         const combinedData = {
             labels: ['Temperature', 'Humidity', 'Wind Speed'],
@@ -88,14 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 borderWidth: 1
             }]
         };
-    
+
         const historicalData = {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Average Temperature (°C)',
                 data: data.historical,
                 fill: false,
-                borderColor: '#bb86fc', // Accent color
+                borderColor: '#bb86fc',
                 tension: 0.3,
                 pointBackgroundColor: '#bb86fc',
                 pointBorderColor: '#fff',
@@ -103,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pointHoverBorderColor: '#bb86fc'
             }]
         };
-    
+
         const radarData = {
             labels: ['Temperature', 'Humidity', 'Wind Speed'],
             datasets: [{
@@ -117,13 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 pointHoverBorderColor: 'rgba(179, 181, 198, 1)'
             }]
         };
-    
+
         if (combinedChart) {
             combinedChart.destroy();
             historicalChart.destroy();
             radarChart.destroy();
         }
-    
+
         combinedChart = new Chart(combinedCtx, { type: 'bar', data: combinedData, options: {
             scales: { y: { beginAtZero: true } },
             plugins: { tooltip: { callbacks: { label: function(context) {
@@ -134,17 +136,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (label === 'Wind Speed') return `Wind Speed: ${value} m/s`;
                 return `${label}: ${value}`;
             } } } } } });
-    
+
         historicalChart = new Chart(historicalCtx, { type: 'line', data: historicalData, options: {
             scales: { y: { beginAtZero: true } },
             plugins: { tooltip: { mode: 'index', intersect: false } } } });
-    
+
         radarChart = new Chart(radarCtx, { type: 'radar', data: radarData, options: {
             scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, pointLabels: { color: '#e0e0e0' } } },
             plugins: { tooltip: { mode: 'point' } } } });
     }
-    
+
+    // Initialize rangeslider
+    $('#temperatureRange').rangeslider({
+        polyfill: false, // Important for proper initialization
+        rangeClass: 'rangeslider',
+        fillClass: 'rangeslider__fill',
+        handleClass: 'rangeslider__handle',
+        start: [0, 35], // Set initial range here
+
+        onInit: function() {
+            const values = this.value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
+            temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+        },
+        onSlide: function(position, value) {
+            const values = value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
+            temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+        },
+        onSlideEnd: function(position, value) {
+            const values = value.split(',');
+            temperatureRange[0] = parseInt(values[0]);
+            temperatureRange[1] = parseInt(values[1]);
+             // Update the dashboard with the new temperature range
+            const selectedCity = citySelector.value;
+            const currentData = generateMockWeatherData(selectedCity);
+            updateDashboard(currentData);
+        }
+    });
+
+
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
         updateDashboard(data);
     });
+
+    // Initial data load
+    const initialData = generateMockWeatherData(citySelector.value);
+    updateDashboard(initialData);
+
+});

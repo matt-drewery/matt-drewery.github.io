@@ -93,18 +93,29 @@ output {
     text-align: center;
 }
 
-.rangeslider__handle {
+/* More Specific CSS for rangeslider.js */
+.rangeslider {
+    height: 4px !important; /* Override default height */
+}
+
+.rangeslider, .rangeslider .rangeslider__fill {
+    background: #424242; /* Consistent background color */
+    box-shadow: none; /* Remove default shadows */
+}
+
+.rangeslider .rangeslider__handle {
     background-color: #bb86fc !important;
     width: 20px !important;
     height: 20px !important;
-    top: -8px !important;
+    top: -8px !important;  /* Adjust vertical position */
+    border: none !important; /* Remove default border */
+    box-shadow: none !important; /* Remove default shadows */
 }
-
-.rangeslider__fill {
+.rangeslider .rangeslider__fill {
     background-color: #bb86fc !important;
-    height: 4px !important;
+    height: 4px !important; /* Adjust fill height */
 }
 
-.rangeslider {
-    height: 4px !important;
+.rangeslider-horizontal .rangeslider__handle:after {
+    display:none;
 }
