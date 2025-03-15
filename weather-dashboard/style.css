@@ -25,7 +25,7 @@ h1 {
 }
 
 #map {
-    height: 450px;
+    height: 550px; /* Increased map height */
     width: 100%;
     margin-bottom: 30px;
     border-radius: 8px;

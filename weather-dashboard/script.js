@@ -160,15 +160,20 @@ document.addEventListener('DOMContentLoaded', () => {
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
-            // Get the values from the plugin's handles
-            temperatureRange[0] = this.handle[0].attributes[2].nodeValue;
-            temperatureRange[1] = this.handle[1].attributes[2].nodeValue;
+            // Get the values from the plugin's handles, and convert to numbers
+            temperatureRange[0] = parseInt(this.handle[0].attributes[2].nodeValue);
+            temperatureRange[1] = parseInt(this.handle[1].attributes[2].nodeValue);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
+
+            // Update the dashboard *during* the slide for immediate feedback
+            const selectedCity = citySelector.value;
+            const currentData = generateMockWeatherData(selectedCity);
+            updateDashboard(currentData);
         },
         onSlideEnd: function(position, value) {
-             // Get the values from the plugin's handles
-            temperatureRange[0] = this.handle[0].attributes[2].nodeValue;
-            temperatureRange[1] = this.handle[1].attributes[2].nodeValue;
+             // Get the values from the plugin's handles, and convert to numbers
+            temperatureRange[0] = parseInt(this.handle[0].attributes[2].nodeValue);
+            temperatureRange[1] = parseInt(this.handle[1].attributes[2].nodeValue);
              // Update the dashboard with the new temperature range
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
