@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const values = this.$element.val().split(',').map(Number); // Get value from the INPUT
             temperatureRange[0] = values[0];
             temperatureRange[1] = values[1];
+            // Update output *after* updating temperatureRange
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
 
             const selectedCity = citySelector.value;
@@ -174,13 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const values = this.$element.val().split(',').map(Number);  // Get value from the INPUT
             temperatureRange[0] = values[0];
             temperatureRange[1] = values[1];
+             // Update output *after* updating temperatureRange
+            temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
             updateDashboard(currentData);
         }
     });
+
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
+         // Reset the range slider to the default values when the city changes.
+        $temperatureRange.rangeslider('value', '0,35'); // Correctly set the value
+        temperatureRange = [0, 35]; // Reset internal range
         updateDashboard(data);
     });
 
