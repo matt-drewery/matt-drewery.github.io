@@ -168,18 +168,6 @@ footer {
     padding: 1.5rem 0;
 }
 
-/* Animations for Service Items */
-.service-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.service-item.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .team_member {
     width: 75%;
     height: 75%;
