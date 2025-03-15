@@ -16,27 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
             coord: { lat: 0, lon: 0 },
             main: { temp: 0, humidity: 0 },
             wind: { speed: 0 },
-            historical: [10, 12, 15, 18, 20, 22, 21, 19, 17, 14, 12, 11],
+            historical: [],
             radar: { temp: 0, humidity: 0, wind: 0 }
         };
-
+    
         if (city === 'London') {
             data.coord = { lat: 51.5074, lon: -0.1278 };
-            data.main = { temp: 15, humidity: 70 };
-            data.wind = { speed: 5 };
-            data.radar = { temp: 15, humidity: 70, wind: 5 };
+            data.main = { temp: 12, humidity: 80 };
+            data.wind = { speed: 6 };
+            data.historical = [8, 9, 11, 13, 15, 17, 18, 17, 15, 13, 10, 9];
+            data.radar = { temp: 12, humidity: 80, wind: 6 };
         } else if (city === 'New York') {
             data.coord = { lat: 40.7128, lon: -74.0060 };
-            data.main = { temp: 20, humidity: 60 };
-            data.wind = { speed: 7 };
-            data.radar = { temp: 20, humidity: 60, wind: 7 };
+            data.main = { temp: 22, humidity: 65 };
+            data.wind = { speed: 8 };
+            data.historical = [2, 4, 8, 14, 20, 25, 28, 27, 22, 16, 10, 5];
+            data.radar = { temp: 22, humidity: 65, wind: 8 };
         } else if (city === 'Tokyo') {
             data.coord = { lat: 35.6895, lon: 139.6917 };
-            data.main = { temp: 25, humidity: 55 };
-            data.wind = { speed: 3 };
-            data.radar = { temp: 25, humidity: 55, wind: 3 };
+            data.main = { temp: 27, humidity: 75 };
+            data.wind = { speed: 4 };
+            data.historical = [5, 8, 12, 18, 23, 27, 30, 31, 28, 22, 16, 10];
+            data.radar = { temp: 27, humidity: 75, wind: 4 };
         }
-
+    
         return data;
     }
 
