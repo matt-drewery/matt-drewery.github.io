@@ -174,8 +174,8 @@ footer {
 }
 
 .team_member {
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 75%;
 }
 
 /* Javascript to add show class to service items when they are in viewport. */
