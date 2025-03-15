@@ -112,30 +112,83 @@ document.addEventListener('DOMContentLoaded', () => {
             radarChart.destroy();
         }
 
-        combinedChart = new Chart(combinedCtx, { type: 'bar', data: combinedData, options: {
-            scales: { y: { beginAtZero: true } },
-            plugins: { tooltip: { callbacks: { label: function(context) {
-                const label = context.label || '';
-                const value = context.parsed.y;
-                if (label === 'Temperature') return `Temperature: ${value}°C`;
-                if (label === 'Humidity') return `Humidity: ${value}%`;
-                if (label === 'Wind Speed') return `Wind Speed: ${value} m/s`;
-                return `${label}: ${value}`;
-            } } },
-            legend: {display: false}
-          } });
+        combinedChart = new Chart(combinedCtx, {
+            type: 'bar',
+            data: combinedData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed.y;
+                                if (label === 'Temperature') return `Temperature: ${value}°C`;
+                                if (label === 'Humidity') return `Humidity: ${value}%`;
+                                if (label === 'Wind Speed') return `Wind Speed: ${value} m/s`;
+                                return `${label}: ${value}`;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
 
-        historicalChart = new Chart(historicalCtx, { type: 'line', data: historicalData, options: {
-            scales: { y: { beginAtZero: true } },
-            plugins: { tooltip: { mode: 'index', intersect: false } },
-            legend: {display: false}
-          } });
+        historicalChart = new Chart(historicalCtx, {
+            type: 'line',
+            data: historicalData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
 
-        radarChart = new Chart(radarCtx, { type: 'radar', data: radarData, options: {
-            scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, pointLabels: { color: '#e0e0e0' } } },
-            plugins: { tooltip: { mode: 'point' } },
-            legend: {display: false}
-          } });
+        radarChart = new Chart(radarCtx, {
+            type: 'radar',
+            data: radarData,
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'point'
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
 
         // Add chart titles
         document.getElementById('combinedChart').insertAdjacentHTML('beforebegin', '<h3 class="chart-title">Current Conditions</h3>');
