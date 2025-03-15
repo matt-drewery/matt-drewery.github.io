@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,6 +343,25 @@
             opacity: 1;
         }
         
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
         @media (max-width: 768px) {
             .about-content {
                 flex-direction: column;
@@ -364,6 +382,11 @@
             .nav-links {
                 display: none;
             }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -382,7 +405,7 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Matthew Drewery</h1>
+            <h1>Matt Drewery</h1>
             <p>Web Developer & Digital Craftsman</p>
             <div class="hero-buttons">
                 <a href="#portfolio" class="btn btn-primary">View My Work</a>
@@ -465,20 +488,69 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Portfolio Item 3 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-img">
-                        <img src="/api/placeholder/400/320" alt="Mobile App" />
+            </section>
+
+            <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Matt@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>New York, NY</span>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
                     </div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">Fitness Tracking App</h3>
-                        <p>A progressive web app that helps users track workouts, set goals, and monitor progress over time.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">React Native</span>
-                            <span class="portfolio-tag">Firebase</span>
-                            <span class="portfolio-tag">GraphQL</span>
-                        </div>
-                        <div class="portfolio-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-form">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <p>&copy; 2025 Matt Drewery. All rights reserved.</p>
+    </footer>
+
+    <a href="#home" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to top button functionality
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
