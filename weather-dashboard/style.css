@@ -18,19 +18,16 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-h1 {
+/* Sleek Title Styling */
+.main-title {
     text-align: center;
     margin-bottom: 30px;
     color: #bb86fc;
+    font-size: 2.5em; /* Larger font size */
+    font-weight: bold;  /* Bold font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
 }
 
-#map {
-    height: 550px; /* Increased map height */
-    width: 100%;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    overflow: hidden;
-}
 
 .controls {
     margin-bottom: 30px;
@@ -57,6 +54,15 @@ input[type="range"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
+}
+
+/* Make sure #map styles override canvas styles */
+#map {
+    height: 550px !important; /* Increased map height AND !important */
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 canvas {

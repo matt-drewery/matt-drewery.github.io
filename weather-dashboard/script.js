@@ -154,11 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
         start: [0, 35],
 
         onInit: function() {
-            // No need to split the value in onInit
+            // **CRITICAL FIX:** Update the *input element's* value on init.
+            this.$element.val(this.options.start.join(',')); // Set the actual input value
             temperatureRange[0] = this.options.start[0];
             temperatureRange[1] = this.options.start[1];
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
-
         },
         onSlide: function(position, value) {
             const values = this.$element.val().split(',').map(Number); // Get value from the INPUT
