@@ -177,29 +177,70 @@ footer {
     height: 75%;
 }
 
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.4s;
+}
+
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     nav ul {
+        display: none;
         flex-direction: column;
         width: 100%;
-        margin-top: 10px;
+        position: absolute;
+        top: 60px; /* Adjust based on your header height */
+        left: 0;
+        background-color: #2c3e50;
+        text-align: center;
     }
 
     nav ul li {
-        margin-left: 0;
-        margin-top: 10px;
+        margin: 0;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav ul.nav-active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        flex-wrap: wrap;
     }
 
     .contact-form {
-        padding: 0 10px; /* Add padding to sides */
+        padding: 0 10px;
     }
 
     .contact-info {
-        margin-top: 30px; /* Add margin between form and info */
+        margin-top: 30px;
     }
+}
+
+/* Hamburger Animation */
+.hamburger.toggle .line:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.toggle .line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.toggle .line:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
