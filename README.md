@@ -498,15 +498,15 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>Matt@example.com</span>
+                    <span>matt.drewery@gmail.com</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>(123) 456-7890</span>
+                    <span>07551 307284</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span>New York, NY</span>
+                    <span>Peterborough, United Kingdom</span>
                 </div>
             </div>
             <div class="contact-form">
