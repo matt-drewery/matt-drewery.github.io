@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             historical: filteredHistorical
         };
 
-
         createCharts(filteredData);
     }
 
@@ -155,21 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
         start: [0, 35], // Set initial range here
 
         onInit: function() {
-            const values = this.value.split(',');
-            temperatureRange[0] = parseInt(values[0]);
-            temperatureRange[1] = parseInt(values[1]);
+            // Get initial values from the plugin's internal data
+            temperatureRange[0] = this.min;
+            temperatureRange[1] = this.max;
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
-            const values = value.split(',');
-            temperatureRange[0] = parseInt(values[0]);
-            temperatureRange[1] = parseInt(values[1]);
+            // Get the values from the plugin's handles
+            temperatureRange[0] = this.handle[0].attributes[2].nodeValue;
+            temperatureRange[1] = this.handle[1].attributes[2].nodeValue;
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlideEnd: function(position, value) {
-            const values = value.split(',');
-            temperatureRange[0] = parseInt(values[0]);
-            temperatureRange[1] = parseInt(values[1]);
+             // Get the values from the plugin's handles
+            temperatureRange[0] = this.handle[0].attributes[2].nodeValue;
+            temperatureRange[1] = this.handle[1].attributes[2].nodeValue;
              // Update the dashboard with the new temperature range
             const selectedCity = citySelector.value;
             const currentData = generateMockWeatherData(selectedCity);
