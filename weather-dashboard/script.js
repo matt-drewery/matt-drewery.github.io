@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             coord: { lat: 0, lon: 0 },
             main: { temp: 0, humidity: 0 },
             wind: { speed: 0 },
-            historical: [], // Corrected: Initialize as empty array
+            historical: [],
             radar: { temp: 0, humidity: 0, wind: 0 }
         };
 
@@ -57,12 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        // Filter historical data based on the current temperatureRange
         const filteredHistorical = data.historical.filter(temp => {
             return temp >= temperatureRange[0] && temp <= temperatureRange[1];
         });
 
-        // Create a new data object with filtered historical data
         const filteredData = {
             ...data,
             historical: filteredHistorical
@@ -145,22 +143,22 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, pointLabels: { color: '#e0e0e0' } } },
             plugins: { tooltip: { mode: 'point' } } } });
     }
-    // Initialize rangeslider
+
     $temperatureRange.rangeslider({
         polyfill: false,
         rangeClass: 'rangeslider',
         fillClass: 'rangeslider__fill',
         handleClass: 'rangeslider__handle',
-        values: [0, 35], // Use 'values' instead of 'start' for a range slider
+        values: [0, 35],
 
         onInit: function() {
-            const values = this.value.split(',');
+            const values = this.$element.val().split(',');
             temperatureRange[0] = parseInt(values[0]);
             temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         },
         onSlide: function(position, value) {
-            const values = this.value.split(',');
+            const values = this.$element.val().split(',');
             temperatureRange[0] = parseInt(values[0]);
             temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
@@ -170,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDashboard(currentData);
         },
         onSlideEnd: function(position, value) {
-            const values = this.value.split(',');
+            const values = this.$element.val().split(',');
             temperatureRange[0] = parseInt(values[0]);
             temperatureRange[1] = parseInt(values[1]);
             temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
@@ -182,14 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     citySelector.addEventListener('change', () => {
         const data = generateMockWeatherData(citySelector.value);
-         // Reset the range slider to the default values when the city changes.
-        $temperatureRange.rangeslider('values', [0, 35]); // Use 'values' to set both handles
-        temperatureRange = [0, 35]; // Reset internal range
-        temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`; // Update output
+        $temperatureRange.rangeslider('values', [0, 35]);
+        temperatureRange = [0, 35];
+        temperatureRangeOutput.textContent = `${temperatureRange[0]}°C - ${temperatureRange[1]}°C`;
         updateDashboard(data);
     });
 
-    // Initial data load
     const initialData = generateMockWeatherData(citySelector.value);
     updateDashboard(initialData);
 });
