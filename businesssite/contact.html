@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Business Name - Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Your Logo</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p>Email: info@yourbusiness.com</p>
+            <p>Phone: +1 123 456 7890</p>
+            <p>Address: 123 Main Street, City, Country</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Business Name. All rights reserved.</p>
+    </footer>
+</body>
+<script>
+    const serviceItems = document.querySelectorAll('.service-item');
+
+    function checkSlide() {
+        serviceItems.forEach(item => {
+            const slideInAt = (window.scrollY + window.innerHeight) - item.offsetHeight / 2;
+            const itemBottom = item.offsetTop + item.offsetHeight;
+            const isHalfShown = slideInAt > item.offsetTop;
+            const isNotScrolledPast = window.scrollY < itemBottom;
+            if (isHalfShown && isNotScrolledPast) {
+                item.classList.add('show');
+            } else {
+                item.classList.remove('show');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); // Check on page load
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Business Name - Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Your Logo</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="services-detailed">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <img src="placeholder_service1.jpg" alt="Service 1">
+            <h3>Service 1</h3>
+            <p>Detailed description of service 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="service-item">
+            <img src="placeholder_service2.jpg" alt="Service 2">
+            <h3>Service 2</h3>
+            <p>Detailed description of service 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="service-item">
+            <img src="placeholder_service3.jpg" alt="Service 3">
+            <h3>Service 3</h3>
+            <p>Detailed description of service 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Business Name. All rights reserved.</p>
+    </footer>
+</body>
+<script>
+    const serviceItems = document.querySelectorAll('.service-item');
+
+    function checkSlide() {
+        serviceItems.forEach(item => {
+            const slideInAt = (window.scrollY + window.innerHeight) - item.offsetHeight / 2;
+            const itemBottom = item.offsetTop + item.offsetHeight;
+            const isHalfShown = slideInAt > item.offsetTop;
+            const isNotScrolledPast = window.scrollY < itemBottom;
+            if (isHalfShown && isNotScrolledPast) {
+                item.classList.add('show');
+            } else {
+                item.classList.remove('show');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); // Check on page load
+</script>
+</html>
