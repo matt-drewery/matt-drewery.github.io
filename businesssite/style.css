@@ -122,8 +122,15 @@ nav ul li a:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.card img, .portfolio-item img, .member img, .service-item img {
+.card img, .portfolio-item img, .member img {
     max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.service-item img {
+    max-width: 50%;
     height: auto;
     margin-bottom: 20px;
     border-radius: 5px;

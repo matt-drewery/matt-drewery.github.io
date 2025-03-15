@@ -41,24 +41,4 @@
         <p>&copy; 2024 Your Business Name. All rights reserved.</p>
     </footer>
 </body>
-<script>
-    const serviceItems = document.querySelectorAll('.service-item');
-
-    function checkSlide() {
-        serviceItems.forEach(item => {
-            const slideInAt = (window.scrollY + window.innerHeight) - item.offsetHeight / 2;
-            const itemBottom = item.offsetTop + item.offsetHeight;
-            const isHalfShown = slideInAt > item.offsetTop;
-            const isNotScrolledPast = window.scrollY < itemBottom;
-            if (isHalfShown && isNotScrolledPast) {
-                item.classList.add('show');
-            } else {
-                item.classList.remove('show');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); // Check on page load
-</script>
 </html>
