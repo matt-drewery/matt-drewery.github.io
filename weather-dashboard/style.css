@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Changed height to min-height to ensure content doesn't get cut off */
+    min-height: 100vh;
     margin: 0;
     background-color: #121212;
     color: #e0e0e0;
@@ -18,16 +18,14 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Sleek Title Styling */
 .main-title {
     text-align: center;
     margin-bottom: 30px;
     color: #bb86fc;
-    font-size: 2.5em; /* Larger font size */
-    font-weight: bold;  /* Bold font */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 
 .controls {
     margin-bottom: 30px;
@@ -40,8 +38,7 @@ label {
     color: #bdbdbd;
 }
 
-select,
-input[type="range"] {
+select {
     background-color: #2c2c2c;
     color: #e0e0e0;
     border: 1px solid #424242;
@@ -51,14 +48,13 @@ input[type="range"] {
 }
 
 .charts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
+    flex-direction: column; /* Changed to column for full width charts */
     gap: 30px;
 }
 
-/* Make sure #map styles override canvas styles */
 #map {
-    height: 500px !important; /* Adjusted map height */
+    height: 500px !important;
     width: 100%;
     margin-bottom: 30px;
     border-radius: 8px;
@@ -81,47 +77,4 @@ canvas {
     border-radius: 8px;
     display: none;
     pointer-events: none;
-}
-
-.range-sliders {
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-}
-
-output {
-    background-color: #424242;
-    color: #e0e0e0;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-left: 10px;
-    min-width: 100px;
-    text-align: center;
-}
-
-/* More Specific CSS for rangeslider.js */
-.rangeslider {
-    height: 4px !important; /* Override default height */
-}
-
-.rangeslider, .rangeslider .rangeslider__fill {
-    background: #424242; /* Consistent background color */
-    box-shadow: none; /* Remove default shadows */
-}
-
-.rangeslider .rangeslider__handle {
-    background-color: #bb86fc !important;
-    width: 20px !important;
-    height: 20px !important;
-    top: -8px !important;  /* Adjust vertical position */
-    border: none !important; /* Remove default border */
-    box-shadow: none !important; /* Remove default shadows */
-}
-.rangeslider .rangeslider__fill {
-    background-color: #bb86fc !important;
-    height: 4px !important; /* Adjust fill height */
-}
-
-.rangeslider-horizontal .rangeslider__handle:after {
-    display:none;
 }
