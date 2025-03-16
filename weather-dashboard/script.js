@@ -137,6 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     legend: {
                         display: false
                     }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Current Conditions',
+                        color: '#e0e0e0'
+                    }
                 }
             }
         });
@@ -158,6 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 legend: {
                     display: false
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Historical Temperature',
+                        color: '#e0e0e0'
+                    }
                 }
             }
         });
@@ -185,15 +199,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     legend: {
                         display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Weather Radar',
+                        color: '#e0e0e0'
                     }
                 }
             }
         });
-
-        // Add chart titles
-        document.getElementById('combinedChart').insertAdjacentHTML('beforebegin', '<h3 class="chart-title">Current Conditions</h3>');
-        document.getElementById('historicalChart').insertAdjacentHTML('beforebegin', '<h3 class="chart-title">Historical Temperature</h3>');
-        document.getElementById('radarChart').insertAdjacentHTML('beforebegin', '<h3 class="chart-title">Weather Radar</h3>');
     }
 
     citySelector.addEventListener('change', () => {
