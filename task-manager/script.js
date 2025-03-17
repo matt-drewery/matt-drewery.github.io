@@ -154,18 +154,18 @@ function createCategoryDropdownSystem(inputElement) {
 }
 
 // Create the dropdown for the add task form
-const updateAddTaskDropdown = createCategoryDropdownSystem(taskCategoryInput);
+  const updateAddTaskDropdown = createCategoryDropdownSystem(taskCategoryInput);
   
-// Create the dropdown for the edit task form
-const updateEditTaskDropdown = createCategoryDropdownSystem(editTaskCategoryInput);
-
-// Update dropdowns when categories change
-const originalRenderCategories = renderCategories;
-renderCategories = function() {
-  originalRenderCategories();
-  updateAddTaskDropdown();
-  updateEditTaskDropdown();
-};
+  // Create the dropdown for the edit task form
+  const updateEditTaskDropdown = createCategoryDropdownSystem(editTaskCategoryInput);
+  
+  // Update dropdowns when categories change
+  const originalRenderCategories = renderCategories;
+  renderCategories = function() {
+    originalRenderCategories();
+    updateAddTaskDropdown();
+    updateEditTaskDropdown();
+  };
 
     
 
