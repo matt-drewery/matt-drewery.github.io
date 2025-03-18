@@ -37,8 +37,8 @@ html {
 }
 
 body {
-    background-color: var(--dark); /* Dark background */
-    color: var(--light); /* White text */
+    background-color: var(--dark) !important; /* Force background color */
+    color: var(--light) !important; /* Force text color */
     line-height: 1.7;
 }
 
@@ -293,13 +293,17 @@ section#portfolio {
 }
 
 .portfolio-links a {
-    color: var(--primary); /* Darker pink for links */
+    color: var(--light); /* Use white for links inside portfolio items */
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
     transition: color 0.3s;
+}
+
+.portfolio-content p{
+     color: var(--light);
 }
 
 .portfolio-links a:hover {
@@ -311,7 +315,7 @@ section#portfolio {
 }
 
 .contact-info a {
-    color: var(--primary); /* Pink contact links */
+    color: var(--light); /* Use white for the email link */
     text-decoration: none;
     transition: color 0.3s;
 }
