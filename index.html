@@ -16,13 +16,13 @@
     <link href="css/brands.min.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'"><noscript><link rel="stylesheet" href="css/brands.min.css"></noscript>
     <style>
         :root {
-    --primary: #ff69b4; /* Pink from the image */
-    --dark: #282c34; /* Dark blue/cyan from the walls */
-    --light: #ffffff; /* White text */
-    --gray: #c8c8c8; /* Light gray for secondary text */
-    --accent: #ffa07a; /* Light orange/peach accents */
-    --secondary: #383e4a; /* Slightly lighter blue for cards */
-    --text-light: #adb5bd; /* Keep this for subtle text */
+    --primary: #e60073; /* Darker, accessible pink */
+    --dark: #282c34;
+    --light: #ffffff;
+    --gray: #c8c8c8;
+    --accent: #ffa07a;
+    --secondary: #383e4a;
+    --text-light: #adb5bd;
 }
 
 * {
@@ -136,13 +136,13 @@ nav {
 }
 
 .btn-primary {
-    background-color: var(--primary); /* Pink buttons */
+    background-color: var(--primary); /* Darker pink */
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:hover {
-    background-color: #e04090; /* Darker pink hover */
+    background-color: #b30059; /* Even darker pink on hover */
 }
 
 .btn-outline {
@@ -228,12 +228,16 @@ section {
     gap: 3rem;
 }
 
+section#portfolio {
+    background-color: var(--secondary); /* Changed from inline style */
+}
+
 .portfolio-item {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-    background-color: var(--secondary); /* Lighter blue portfolio items */
+    background-color: #2b303a; /* Darker background for better contrast */
 }
 
 .portfolio-item:hover {
@@ -257,6 +261,10 @@ section {
     padding: 2rem;
 }
 
+.portfolio-content p{
+     color: var(--light);
+}
+
 .portfolio-title {
     margin-bottom: 0.75rem;
     font-size: 1.5rem;
@@ -271,8 +279,8 @@ section {
 }
 
 .portfolio-tag {
-    background-color: #5a626d; /* Lighter blue tags */
-    color: var(--gray);
+    background-color: #a9a9a9; /* Lighter gray background */
+    color: #000; /* Black text */
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -285,7 +293,7 @@ section {
 }
 
 .portfolio-links a {
-    color: var(--primary); /* Pink links */
+    color: var(--primary); /* Darker pink for links */
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -441,7 +449,7 @@ footer {
         </div>
     </section>
 
-    <section id="portfolio" style="background-color: #d0d8e0;">
+    <section id="portfolio">
         <div class="container">
             <div class="section-title">
                 <h2>My Portfolio</h2>
